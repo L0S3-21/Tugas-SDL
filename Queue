@@ -1,0 +1,74 @@
+package com.sdl.queue;
+
+import com.sdl.list.ListNode;
+
+public class Queue {
+
+    private ListNode front;
+    private ListNode rear;
+
+    public Queue() {
+        front = null;
+        rear = null;
+    }
+
+    public boolean isEmpty() {
+        return front == null;
+    }
+
+    public void enqueue(ListNode node) {
+
+        if (isEmpty()) {
+            front = node;
+            rear = node;
+        } else {
+            rear.setNext(node);
+            rear = node;
+        }
+    }
+
+    public ListNode dequeue() {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        ListNode temp = front;
+
+        if (front == rear) {
+            front = null;
+            rear = null;
+        } else {
+            front = front.getNext();
+            temp.setNext(null);
+        }
+
+        return temp;
+    }
+
+    public int getSize() {
+
+        int count = 0;
+        ListNode temp = front;
+
+        while (temp != null) {
+            count++;
+            temp = temp.getNext();
+        }
+
+        return count;
+    }
+
+    public int getSumOfTotalNumbers() {
+
+        int sum = 0;
+        ListNode temp = front;
+
+        while (temp != null) {
+            sum += temp.getData().getNumbers();
+            temp = temp.getNext();
+        }
+
+        return sum;
+    }
+}
